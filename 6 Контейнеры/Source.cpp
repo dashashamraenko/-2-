@@ -25,6 +25,7 @@ int InputInt()
 				cerr << "Критическая ошибка в потоке ввода. Программа завершена." << endl;
 				exit(1);
 			}
+			cout << "Вводите только целые числа!" << endl;
 
 		}
 
@@ -55,7 +56,7 @@ class Vegetable
 	int count;
 
 public:
-	Vegetable() :name("-"), count(0) {}
+	Vegetable(){}
 	Vegetable(const Vegetable& obj) : name(obj.name), count(obj.count) {}
 	Vegetable(const string& name, int count) :name(name), count(count) {};
 
@@ -75,6 +76,11 @@ public:
 		return count < obj.count;
 	}
 
+	bool operator==(const Vegetable& obj)const
+	{
+		return count == obj.count;
+	}
+
 	void input()
 	{
 		cout << "Введите название:" << endl;
@@ -84,7 +90,7 @@ public:
 		} while (name.empty());
 
 		cout << "Введите количество:" << endl;
-		count = InputInt(0, 10000000);
+		count = InputInt(0, 1000000);
 	}
 	string getInfo()const
 	{
@@ -132,7 +138,7 @@ void VectorMenu()
 			}
 
 			int i = 1;
-			for (auto vegetable : vegetables)
+			for (auto vegetable : vegetables)//автоматически объявляем переменную и определяем тип
 			{
 				cout << i++ << ". " << vegetable.getInfo() << endl;
 			}
@@ -254,6 +260,7 @@ void VectorMenu()
 			if (vegetables.empty())
 			{
 				fout << "Список пуст" << endl;
+				system("pause");
 			}
 			else
 			{
@@ -262,6 +269,8 @@ void VectorMenu()
 				{
 					fout << i++ << ". " << vegetable.getInfo() << endl;
 				}
+				cout << "Запись добавлена в файл 'l6_vector.txt'" << endl;
+				system("pause");
 			}
 			fout.close();
 			break;
@@ -451,6 +460,7 @@ void ListMenu()
 			if (vegetables.empty())
 			{
 				fout << "Список пуст" << endl;
+				system("pause");
 			}
 			else
 			{
@@ -459,6 +469,8 @@ void ListMenu()
 				{
 					fout << i++ << ". " << vegetable.getInfo() << endl;
 				}
+				cout << "Запись добавлена в файл 'l6_list.txt'" << endl;
+				system("pause");
 			}
 			fout.close();
 			break;
@@ -549,7 +561,7 @@ void ArrayMenu()
 				cout << i + 1 << ". " << vegetables[i].getInfo() << endl;
 			}
 
-			cout << "Выберите элемент для удаления:" << endl;
+			cout << "Выберите элемент для редактирования:" << endl;
 			int index = InputInt(1, count) - 1;
 			vegetables[index].input();
 			break;
@@ -643,6 +655,7 @@ void ArrayMenu()
 			if (count == 0)
 			{
 				fout << "Список пуст" << endl;
+				system("pause");
 			}
 			else
 			{
@@ -650,6 +663,8 @@ void ArrayMenu()
 				{
 					fout << i + 1 << ". " << vegetables[i].getInfo() << endl;
 				}
+				cout << "Запись добавлена в файл 'l6_array.txt'" << endl;
+				system("pause");
 			}
 			fout.close();
 			break;
@@ -672,9 +687,9 @@ int main()
 	while (isWork)
 	{
 		system("cls");
-		cout << "1.Vector" << endl;
-		cout << "2.List" << endl;
-		cout << "3.Array" << endl;
+		cout << "1.Работа с контейнером Vector" << endl;
+		cout << "2.Работа с контейнером List" << endl;
+		cout << "3.Работа с контейнером Array" << endl;
 		cout << "4.Выход" << endl;
 
 		switch (InputInt(1, 4))

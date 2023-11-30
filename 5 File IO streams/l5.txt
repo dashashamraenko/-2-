@@ -1,4 +1,4 @@
-5
+6
 1
 BINARY
 15
@@ -28,4 +28,10 @@ TEXT
 22
 we
 wdwc
+
+1
+TEXT
+44
+hide seek
+hide and seek'
 

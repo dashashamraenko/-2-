@@ -161,6 +161,10 @@ struct PointerItem
 template<class T>
 class SmartPointer
 {
+private:
+
+	PointerItem<T>* pointer;
+
 public:
 	SmartPointer(T* obj);
 	SmartPointer(const SmartPointer& obj);
@@ -173,14 +177,14 @@ public:
 	PointerItem<T>* getPtr()const;
 	int getCounter()const;
 
-private:
-
-	PointerItem<T>* pointer;
 };
 
 template<class T>
 class Transaction
-{
+{protected:
+	T* currentState;
+	T* oldState;
+
 public:
 	Transaction();
 	Transaction(const Transaction& obj);
@@ -200,11 +204,6 @@ public:
 	void begin(T* newState);
 	void cancel();
 	void commit();
-
-protected:
-
-	T* currentState;
-	T* oldState;
 };
 
 
@@ -351,19 +350,9 @@ std::string Ball::getInfo() const
 void Ball::input()
 {
 	GraphicObject::input();
-
-	do
-	{
 		cout << "¬ведите радиус:" << endl;
 		radius = InputInt();
 
-		if (radius <= 0)
-		{
-			cout << "ќшибка: радиус должен быть положительным." << std::endl;
-		}
-
-	} while (radius <= 0);
-	
 }
 
 
@@ -632,6 +621,10 @@ int main()
 	vector<SmartPointer<Transaction<GraphicObject>>> objects;
 	vector<SmartPointer<Transaction<GraphicObject>>> additionalRefs;
 
+	shared_ptr<GraphicObject> sp0 = 0;
+
+
+
 	bool isWork = true;
 	while (isWork)
 	{
@@ -773,7 +766,7 @@ int main()
 			{
 				cout << i + 1 << ". " << objects[i].getPtr()->pointer->getCurrentState()->getInfo() << endl;
 			}
-			cout << "¬ведите номер объекта дл€ добавлени€ ссылки:" << endl;
+			cout << "¬ведите номер объекта дл€ удалени€ ссылки:" << endl;
 			int index = 0;
 			index = InputInt();
 			index--;

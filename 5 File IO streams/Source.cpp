@@ -345,7 +345,7 @@ void ConvertationOfFiles::Show()
 		cout << "|";
 		cout << setw(15) << convertations[i]->GetFilenameTo();
 		cout << "|";
-		cout << setw(12) << setfill('0') << convertations[i]->GetTime() << " секунд";
+		cout << setw(12) << convertations[i]->GetTime() << " секунд";
 		cout << setfill(' ');
 
 		cout << "|";
